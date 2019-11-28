@@ -213,7 +213,7 @@ class _SignUpState extends State<SignUp> {
           };
           var jsonResponse;
           var response = await http.post(
-              "http://34.93.104.9:3000/api/trainer/firstlogin",
+              "http://test.letsdooit.in:3000/api/trainer/firstlogin",
               body: data,
               headers: {
                 "Content-type": "application/x-www-form-urlencoded",

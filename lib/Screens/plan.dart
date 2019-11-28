@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:trainer/Screens/Trainer.dart';
-// import 'Today.dart';
+import "package:intl/intl.dart";
 
-// var i;
-// if(i=1)
-// {
-//   print('Today');
-// }
-// else{
-//   while(i>1){
-//     print('Today'+$i);
-//     i=i+1;
-//   }
-// }
+
+var date = DateTime.now();
+//  var day2,day3,day4;
+
+final day2 = date.add(new Duration(days: 1));
+final day3 = date.add(new Duration(days: 2));
+
+final day4 = date.add(new Duration(days: 3));
+var date2 = DateFormat("d MMM").format(day2);
+var date3 = DateFormat("d MMM").format(day3);
+var date4 = DateFormat("d MMM").format(day4);
+void main() {
+  for (int i = 2; i <= 4; i++) {
+    print(date2 + "\n" + date3 + "\n" + date4);
+  }
+}
+
 
 class Plans extends StatefulWidget {
   Plans({Key key}) : super(key: key);
@@ -43,33 +49,33 @@ class _PlansState extends State<Plans> {
                             color: Colors.black,
                             backgroundColor: Colors.white,
                             fontSize:
-                                MediaQuery.of(context).size.height / 35.0)),
+                                MediaQuery.of(context).size.height / 38.0)),
                   ),
                   Tab(
                     child: Text(
-                      " 27 Nov",
+                      date2,
                       style: TextStyle(
                           color: Colors.black,
                           backgroundColor: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height / 35.0),
+                          fontSize: MediaQuery.of(context).size.height / 38.0),
                     ),
                   ),
                   Tab(
                     child: Text(
-                      " 28 Nov",
+                      date3,
                       style: TextStyle(
                           color: Colors.black,
                           backgroundColor: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height / 35.0),
+                          fontSize: MediaQuery.of(context).size.height / 38.0),
                     ),
                   ),
                   Tab(
                     child: Text(
-                      " 29 Nov",
+                      date4,
                       style: TextStyle(
                           color: Colors.black,
                           backgroundColor: Colors.white,
-                          fontSize: MediaQuery.of(context).size.height / 35.0),
+                          fontSize: MediaQuery.of(context).size.height / 38.0),
                     ),
                   ),
                 ],

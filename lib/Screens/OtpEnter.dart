@@ -18,10 +18,9 @@ class _OtpEnterState extends State<OtpEnter> {
 
   final GlobalKey<ScaffoldState> _scaffoldkey2 = new GlobalKey<ScaffoldState>();
 
-  void callSnackBar(String me)
-  {
+  void callSnackBar(String me) {
     print("called me for scnack bar");
-    final SnackBar =new prefix0.SnackBar(
+    final SnackBar = new prefix0.SnackBar(
       content: new Text(me),
       duration: new Duration(seconds: 3),
     );
@@ -29,51 +28,55 @@ class _OtpEnterState extends State<OtpEnter> {
   }
 
   getCities() async {
-    var response =await http.get("http://34.93.104.9:3000/wapi/account/getcities",headers:{"Content-type": "application/x-www-form-urlencoded","token":global.token} );
-    if(response.statusCode==200) {
+    var response = await http
+        .get("http://test.letsdooit.in:3000/wapi/account/getcities", headers: {
+      "Content-type": "application/x-www-form-urlencoded",
+      "token": global.token
+    });
+    if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
       print(jsonResponse);
-      global.City=jsonResponse;
+      global.City = jsonResponse;
       print(global.City);
       print(global.City['cities']);
       print(global.City['cities'].length);
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return
-      Scaffold(
-        key: _scaffoldkey2,
+    return Scaffold(
+      key: _scaffoldkey2,
+      backgroundColor: Colors.white,
+      appBar: new AppBar(
         backgroundColor: Colors.white,
-        appBar: new AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0.0,
-          leading: new IconButton(
-            icon: new Icon(Icons.arrow_back, color: Colors.red),
-            onPressed: (){
-              Navigator.pushNamed(context,"NumberEntry");
-            },
-          ),
+        elevation: 0.0,
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back, color: Colors.red),
+          onPressed: () {
+            Navigator.pushNamed(context, "NumberEntry");
+          },
         ),
-        body: ListView(children: <Widget>[
+      ),
+      body: ListView(
+        children: <Widget>[
           Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Center(
                 child: Container(
-                  margin: EdgeInsets.all(12),
-                  child: Text(
-                    "Please enter 4-digit Otp sent to  your mobile number",
-                    style: TextStyle(fontSize: SizeConfig.blockSizeVertical*2.6, fontWeight: FontWeight.bold),
-                  )
-                ),
+                    margin: EdgeInsets.all(12),
+                    child: Text(
+                      "Please enter 4-digit Otp sent to  your mobile number",
+                      style: TextStyle(
+                          fontSize: SizeConfig.blockSizeVertical * 2.6,
+                          fontWeight: FontWeight.bold),
+                    )),
               ),
               new Container(
-                margin: EdgeInsets.only(left: 15,right: 15),
+                  margin: EdgeInsets.only(left: 15, right: 15),
                   child: new Column(
                     children: <Widget>[
                       new TextFormField(
@@ -86,12 +89,12 @@ class _OtpEnterState extends State<OtpEnter> {
                         keyboardType: TextInputType.number,
                       ),
                     ],
-                  )
-              ),
+                  )),
               Container(
                 width: MediaQuery.of(context).size.width,
                 padding: EdgeInsets.all(8),
-                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height*0.5),
+                margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.5),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -105,7 +108,10 @@ class _OtpEnterState extends State<OtpEnter> {
                             children: <Widget>[
                               Text(
                                 "Resend Code in 00:05",
-                                style: TextStyle(fontSize:SizeConfig.blockSizeVertical* 2.3, fontWeight: FontWeight.w300),
+                                style: TextStyle(
+                                    fontSize:
+                                        SizeConfig.blockSizeVertical * 2.3,
+                                    fontWeight: FontWeight.w300),
                               ),
                             ],
                           ),
@@ -120,12 +126,13 @@ class _OtpEnterState extends State<OtpEnter> {
                                     "Edit my mobile number",
                                     style: TextStyle(
                                         color: Colors.red,
-                                        fontSize: SizeConfig.blockSizeVertical* 2.5,
+                                        fontSize:
+                                            SizeConfig.blockSizeVertical * 2.5,
                                         fontWeight: FontWeight.w400),
                                   ),
-                                  onTap:(){ Navigator.pushNamed(context, "NumberEntry");
-                                  }
-                              )
+                                  onTap: () {
+                                    Navigator.pushNamed(context, "NumberEntry");
+                                  })
                             ],
                           ),
                         )
@@ -137,45 +144,49 @@ class _OtpEnterState extends State<OtpEnter> {
                         color: Colors.white,
                       ),
                       backgroundColor: Colors.red,
-                      onPressed: ()async {
+                      onPressed: () async {
                         print("befoe");
-                        Map data={
-                          "phone":global.mobileNumber.text,
-                          "otp":global.otpEntered.text
+                        Map data = {
+                          "phone": global.mobileNumber.text,
+                          "otp": global.otpEntered.text
                         };
                         var jsonResponse;
-                        var response =await http.post("http://34.93.104.9:3000/tapi/login",body: data,headers: {
-                "Content-type": "application/x-www-form-urlencoded",});
-                        if(response.statusCode==200) {
+                        var response = await http.post(
+                            "http://test.letsdooit.in:3000/tapi/login",
+                            body: data,
+                            headers: {
+                              "Content-type":
+                                  "application/x-www-form-urlencoded",
+                            });
+                        if (response.statusCode == 200) {
                           jsonResponse = json.decode(response.body);
-                          if(jsonResponse['success']==true) {
+                          if (jsonResponse['success'] == true) {
                             print("true");
-                            global.token=jsonResponse['token'];
+                            global.token = jsonResponse['token'];
                             print(global.token);
                             print("object");
-                            SharedPreferences prefs = await SharedPreferences.getInstance();
-                            prefs.setString('token',global.token);
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            prefs.setString('token', global.token);
                             // global.isLogged=true;
                             getCities();
-                            if(jsonResponse['active']==true) {
+                            if (jsonResponse['active'] == true) {
                               print("active user");
                               // getCities();
                               // Navigator.pushNamed(context, "HomeScreen");
                               // Navigator.pushNamed(context,"AccountPage");
                               // Navigator.pushNamed(context,"CitiesPage");
-                              
+
                               Navigator.pushNamed(context, "All");
-                              
+
                               // Navigator.pushNamed(context, "SignUpPage");
-                            }
-                            else if(jsonResponse['active']==false) {
+                            } else if (jsonResponse['active'] == false) {
                               // getCities();
                               print("new user");
                               Navigator.pushNamed(context, "SignUpPage");
                               // Navigator.pushNamed(context, );
                             }
-                          }
-                          else{
+                          } else {
                             // OtpError();
                             callSnackBar("Please Enter correct OTP");
                           }
@@ -187,7 +198,8 @@ class _OtpEnterState extends State<OtpEnter> {
               ),
             ],
           ),
-        ],),
-      );
+        ],
+      ),
+    );
   }
 }

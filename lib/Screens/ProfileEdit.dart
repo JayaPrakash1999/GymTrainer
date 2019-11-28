@@ -11,13 +11,13 @@ class ProfileEdit extends StatefulWidget {
 }
 
 class _ProfileEditState extends State<ProfileEdit> {
-
   @override
   void initState() {
     global.userNameController.text = global.userName;
     global.emailIdController.text = global.emailId;
     super.initState();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,20 +26,16 @@ class _ProfileEditState extends State<ProfileEdit> {
         backgroundColor: Colors.white,
         elevation: 0.0,
         leading: new IconButton(
-
-          icon: new Icon(Icons.arrow_back,
-              color:Colors.red),
-
-          onPressed: (){
-            Navigator.pushNamed(context,"AccountPage");
+          icon: new Icon(Icons.arrow_back, color: Colors.red),
+          onPressed: () {
+            Navigator.pushNamed(context, "AccountPage");
           },
         ),
-
       ),
-      body:ListView(
+      body: ListView(
         children: <Widget>[
           Container(
-            height: MediaQuery.of(context).size.height *1.0,
+            height: MediaQuery.of(context).size.height * 1.0,
             width: MediaQuery.of(context).size.width * 1.0,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -51,7 +47,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                   child: Center(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(110.0),
-                      child:  Image.asset("images/userimg.png"),
+                      child: Image.asset("images/userimg.png"),
                       // Image(
 
                       //   image: NetworkImage(
@@ -81,7 +77,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                           ),
                         ),
                         SizedBox(
-                          height:MediaQuery.of(context).size.height/30 ,
+                          height: MediaQuery.of(context).size.height / 30,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.09,
@@ -100,7 +96,7 @@ class _ProfileEditState extends State<ProfileEdit> {
                           ),
                         ),
                         SizedBox(
-                          height:MediaQuery.of(context).size.height/30 ,
+                          height: MediaQuery.of(context).size.height / 30,
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height * 0.09,
@@ -113,12 +109,11 @@ class _ProfileEditState extends State<ProfileEdit> {
                                 fontWeight: FontWeight.w500),
                             decoration: InputDecoration(
                                 labelText: 'Primary Email',
-                                hintText: global.emailId
-                            ),
+                                hintText: global.emailId),
                           ),
                         ),
                         SizedBox(
-                          height:MediaQuery.of(context).size.height/ 10,
+                          height: MediaQuery.of(context).size.height / 10,
                         ),
                         Center(
                           child: SizedBox(
@@ -129,72 +124,70 @@ class _ProfileEditState extends State<ProfileEdit> {
                                 child: Text(
                                   'Update',
                                   style: TextStyle(
-                                    color: Colors.white,
+                                      color: Colors.white,
                                       fontSize: 20.0,
                                       fontFamily: 'Mantserrat',
-                                      fontWeight: FontWeight.w500
-                                  ),
+                                      fontWeight: FontWeight.w500),
                                 ),
                                 shape: RoundedRectangleBorder(
-                                    borderRadius: new BorderRadius.circular(18.0),
-                                    side: BorderSide(color: Colors.red)
-                                ),
+                                    borderRadius:
+                                        new BorderRadius.circular(18.0),
+                                    side: BorderSide(color: Colors.red)),
                                 elevation: 2.0,
-                                onPressed: ()async{
+                                onPressed: () async {
                                   print("jp");
-                                  global.userName=global.userNameController.text;
+                                  global.userName =
+                                      global.userNameController.text;
                                   // global.UserName=global.MobileNumber.text;
-                                  global.emailId=global.emailIdController.text;
-                                  global.referralCode=global.referralCodeController.text;
-                                  global.address=global.addressController.text;
+                                  global.emailId =
+                                      global.emailIdController.text;
+                                  global.referralCode =
+                                      global.referralCodeController.text;
+                                  global.address =
+                                      global.addressController.text;
 
-
-
-                                  Map data={
-                                    "name":global.userName.toString(),
-                                    "email":global.emailId.toString(),
-                                    "address":global.address.toString(),
-
+                                  Map data = {
+                                    "name": global.userName.toString(),
+                                    "email": global.emailId.toString(),
+                                    "address": global.address.toString(),
                                   };
                                   var jsonResponse;
-                                  var response =await http.post("http://34.93.104.9:3000/api/workplace/updateaccount",body: data,headers:{"Content-type": "application/x-www-form-urlencoded","token":global.token} );
+                                  var response = await http.post(
+                                      "http://test.letsdooit.in:3000/api/workplace/updateaccount",
+                                      body: data,
+                                      headers: {
+                                        "Content-type":
+                                            "application/x-www-form-urlencoded",
+                                        "token": global.token
+                                      });
                                   print("hitted");
-                                  if(response.statusCode==200)
-                                  {
+                                  if (response.statusCode == 200) {
                                     jsonResponse = json.decode(response.body);
                                     // jsonData=json
                                     print("got response");
                                     print(jsonResponse);
-                                    if(jsonResponse['success']==true)
-                                    {
-                                      
-                                        print("true");
-                                        // print(jsonResponse['token']);
-                                        // print("object");
-                                        // global.isLogged=true;
-                                        // print(global.userName);
-                                        // print(global.emailId);
-                                        // print(global.emailIdController.text);
+                                    if (jsonResponse['success'] == true) {
+                                      print("true");
+                                      // print(jsonResponse['token']);
+                                      // print("object");
+                                      // global.isLogged=true;
+                                      // print(global.userName);
+                                      // print(global.emailId);
+                                      // print(global.emailIdController.text);
 
-                                        // Navigator.pushNamed(context, "SignUpPage");
-                                        Navigator.pushNamed(context,"All");
-                                     
-                                    }
-                                    else{
+                                      // Navigator.pushNamed(context, "SignUpPage");
+                                      Navigator.pushNamed(context, "All");
+                                    } else {
                                       // OtpError();
                                       // callSnackBar("Please Enter correct OTP");
-                                      Navigator.pushNamed(context,"All");
+                                      Navigator.pushNamed(context, "All");
                                     }
                                   }
-                                  Navigator.pushNamed(context,"All");
-
-
+                                  Navigator.pushNamed(context, "All");
                                 },
-                              )
-                          ),
+                              )),
                         )
-                      ]
-                  ),
+                      ]),
                 ),
               ],
             ),

@@ -17,24 +17,21 @@ class All extends StatefulWidget {
 }
 
 class _AllState extends State<All> {
-  
-  
-final GlobalKey<ScaffoldState> _scaffoldKey=GlobalKey<ScaffoldState>();
-    void callSnackBar(String msg,[int er])
-  {
-    
-      // msg="There is no record with this user, please register first by clicking Register or check the user mail id or Password";
-      final SnackBar=new prefix0.SnackBar(
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  void callSnackBar(String msg, [int er]) {
+    // msg="There is no record with this user, please register first by clicking Register or check the user mail id or Password";
+    final SnackBar = new prefix0.SnackBar(
       content: new Text(msg),
       duration: new Duration(seconds: 5),
-      action: new SnackBarAction(label: "Exit",
-      onPressed: (){
-        // Navigator.pushNamed(context, "Register");
-        exit(0);
-      },),
+      action: new SnackBarAction(
+        label: "Exit",
+        onPressed: () {
+          // Navigator.pushNamed(context, "Register");
+          exit(0);
+        },
+      ),
     );
-     _scaffoldKey.currentState.showSnackBar(SnackBar);
-    
+    _scaffoldKey.currentState.showSnackBar(SnackBar);
   }
 
   var jsonResponse;
@@ -43,45 +40,32 @@ final GlobalKey<ScaffoldState> _scaffoldKey=GlobalKey<ScaffoldState>();
     // TODO: implement initState
     super.initState();
     getData();
-    // getUpcoming();
-    // getPast();
-    // getAccountDetails();
-    // getPending();
-    // getConfirm();
+   
   }
 
-  getData()async{
-
-
+  getData() async {
     getUpcoming();
     getPast();
     getAccountDetails();
-    // getPending();
-    // getConfirm();
-    // getPaid();
-    // getTrainers();
-    
-
-    
+   
   }
-
 
   getUpcoming() async {
     print("in upcoming");
     print(global.now);
 
-  Map data={
-    "sdate":global.now.toString(),
-  };
+    Map data = {
+      "sdate": global.now.toString(),
+    };
     var response = await http.post(
-        "http://34.93.104.9:3000/api/trainer/upcomingsessions",body: data,
+        "http://test.letsdooit.in:3000/api/trainer/upcomingsessions",
+        body: data,
         headers: {
           "Content-type": "application/x-www-form-urlencoded",
-          "token": 
-          global.token,
+          "token": global.token,
           // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6Ijc3Mzg2OTU5MjgiLCJpYXQiOjE1NzQ2MDcwNTAsImV4cCI6MTE2NTQ2MDcwNTB9.-eHmrhKWK4dBMESMLOD79QRQGx7J75MneKnkcnmQ6bA",
         });
-      print("clicked");
+    print("clicked");
     if (response.statusCode == 200) {
       print("got response0");
       jsonResponse = json.decode(response.body);
@@ -91,14 +75,9 @@ final GlobalKey<ScaffoldState> _scaffoldKey=GlobalKey<ScaffoldState>();
           // global.completedSlots = jsonResponse['completedsession'];
           global.upcomingsessions = jsonResponse['sessions'];
           print(global.upcomingsessions);
-          // print(global.upcomingsessions);
-          print(global.upcomingsessions.length);
-          // print(global.upcomingsessions[0]['account']['name']);
-          // print(global.upcomingsessions[0]['trainer_allotted']['name']);
-          // getAccountDetails();
-                
-           });
-          //  getPast(); 
+          
+        });
+        //  getPast();
       }
     } else {
       print('error');
@@ -107,13 +86,13 @@ final GlobalKey<ScaffoldState> _scaffoldKey=GlobalKey<ScaffoldState>();
 
   getPast() async {
     print("in past");
-    var response = await http
-        .get("http://34.93.104.9:3000/api/trainer/completedsessions", headers: {
-      // "Content-type": "application/x-www-form-urlencoded",
-      "token": 
-      global.token,
-      // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6Ijc3Mzg2OTU5MjgiLCJpYXQiOjE1NzQ2MDcwNTAsImV4cCI6MTE2NTQ2MDcwNTB9.-eHmrhKWK4dBMESMLOD79QRQGx7J75MneKnkcnmQ6bA",
-    });
+    var response = await http.get(
+        "http://test.letsdooit.in:3000/api/trainer/completedsessions",
+        headers: {
+          // "Content-type": "application/x-www-form-urlencoded",
+          "token": global.token,
+          // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6Ijc3Mzg2OTU5MjgiLCJpYXQiOjE1NzQ2MDcwNTAsImV4cCI6MTE2NTQ2MDcwNTB9.-eHmrhKWK4dBMESMLOD79QRQGx7J75MneKnkcnmQ6bA",
+        });
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
       if (jsonResponse['success'] == true) {
@@ -122,50 +101,36 @@ final GlobalKey<ScaffoldState> _scaffoldKey=GlobalKey<ScaffoldState>();
           // global.completedSlots = jsonResponse['completedsession'];
           global.pastsessions = jsonResponse['sessions'];
           print(global.pastsessions);
-          // print(global.pastsessions);
-          // print(global.pastsessions.length);
-          // print(global.pastsessions[0]['account']['name']);
-          // print(global.pastsessions[0]['workplace']['address']);
-          // getAccountDetails();
+        
         });
       }
     } else {
       print('error');
     }
   }
-  
- getAccountDetails() async {
-    var response = await http
-        .get("http://34.93.104.9:3000/api/trainer/getaccountdetails", headers: {
-      // "Content-type": "application/x-www-form-urlencoded",
-      "token":global.token,
+
+  getAccountDetails() async {
+    var response = await http.get(
+        "http://test.letsdooit.in:3000/api/trainer/getaccountdetails",
+        headers: {
+          // "Content-type": "application/x-www-form-urlencoded",
+          "token": global.token,
           // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6Ijc3Mzg2OTU5MjgiLCJpYXQiOjE1NzQ2MDcwNTAsImV4cCI6MTE2NTQ2MDcwNTB9.-eHmrhKWK4dBMESMLOD79QRQGx7J75MneKnkcnmQ6bA",
-    });
+        });
     if (response.statusCode == 200) {
       jsonResponse = json.decode(response.body);
       if (jsonResponse['success'] == true) {
         setState(() {
-        global.AccountDetails=jsonResponse;
-        // print
-        print(global.AccountDetails);
-        // global.referralCode=global.AccountDetails['workplace']['uid'];
-        // print(global.referralCode);
-        //  global.userName=jsonResp,
-        //  global.phone=,
+          global.AccountDetails = jsonResponse;
+          // print
+          print(global.AccountDetails);
+         
         });
       }
     } else {
       print('error');
     }
   }
-
-
-
-
-
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -180,7 +145,6 @@ final GlobalKey<ScaffoldState> _scaffoldKey=GlobalKey<ScaffoldState>();
         onWillPop: () {
           // Navigator.pushNamed(context,"SignUpPage");
           callSnackBar("Click Exit to leave The App");
-
         },
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
@@ -329,7 +293,7 @@ class _UpcomingState extends State<Upcoming> {
   Widget build(BuildContext context) {
     return ListView(children: <Widget>[
       Column(children: <Widget>[
-        SizedBox(
+      global.upcomingsessions==null?Text("No data"):  SizedBox(
             height: MediaQuery.of(context).size.height * 1,
             width: MediaQuery.of(context).size.width * 1,
             child: global.upcomingsessions.length == 0
@@ -366,8 +330,10 @@ class _UpcomingState extends State<Upcoming> {
                                             fontWeight: FontWeight.w600,
                                             fontSize: 16.0),
                                       ),
-                                       Text(
-                                        ''+global.upcomingsessions[index]['timeslot'],
+                                      Text(
+                                        '' +
+                                            global.upcomingsessions[index]
+                                                ['timeslot'],
                                         style: TextStyle(
                                             fontSize: 14.0,
                                             fontWeight: FontWeight.w300),
@@ -384,17 +350,16 @@ class _UpcomingState extends State<Upcoming> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: <Widget>[
-                                         Text(
-                                        "Client: " +
-                                            global.upcomingsessions[index]
-                                                ['account']['name'],
-                                        style: TextStyle(
-                                            color: Colors.red,
-                                            fontWeight: FontWeight.w600,
-                                            fontSize: 18.0),
-                                      ),
-                                     
-                                        IconButton(
+                                          Text(
+                                            "Client: " +
+                                                global.upcomingsessions[index]
+                                                    ['account']['name'],
+                                            style: TextStyle(
+                                                color: Colors.red,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 18.0),
+                                          ),
+                                          IconButton(
                                             iconSize: 30.0,
                                             icon: Icon(Icons.phone_in_talk),
                                             onPressed: () {
@@ -404,7 +369,8 @@ class _UpcomingState extends State<Upcoming> {
                                                   "tel:+91${global.upcomingsessions[index]['account']['phone']}");
                                             },
                                           )
-                                      ],),
+                                        ],
+                                      ),
                                       // Text(
                                       //   "Client: " +
                                       //       global.upcomingsessions[index]
@@ -458,7 +424,7 @@ class Past extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView(children: <Widget>[
       Column(children: <Widget>[
-        SizedBox(
+          global.pastsessions==null?Text("No data"):  SizedBox(
           height: MediaQuery.of(context).size.height * 1,
           width: MediaQuery.of(context).size.width * 0.95,
           child: global.pastsessions.length == 0

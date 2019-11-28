@@ -11,7 +11,23 @@ import 'Screens/NumberEntry.dart';
 import 'Screens/OtpEnter.dart';
 import './Info/variables.dart' as global;
 
-void main() => runApp(MyApp());
+void main() {
+
+
+
+  
+  
+  // int i;
+  // for(i=0;i<3;i++)
+  // {
+  //   global.gold[i]=false;
+  //   print(global.gold[0]);
+  // }
+  
+
+
+runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
