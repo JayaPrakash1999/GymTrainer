@@ -13,7 +13,14 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () {
+          Navigator.pushNamed(context,"All");
+
+          // callSnackBar("Click Exit to leave The App");
+        },
+        child:
+    Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
@@ -237,12 +244,13 @@ class _SignUpState extends State<SignUp> {
               Navigator.pushNamed(context, "All");
               // Navigator.pushNamed(context, "All");
             } else {
+              Navigator.pushNamed(context, "All");
               // OtpError();
               // callSnackBar("Please Enter correct OTP");
             }
           }
         },
       ),
-    );
+    ));
   }
 }

@@ -11,14 +11,16 @@ import '../Info/variables.dart' as global;
 
 
 var date = DateTime.now();
-var daten=DateFormat("yyyy-MM-dd").format(date);
+
 //  var day2,day3,day4;
 
-final day2 = date.add(new Duration(days: 1));
+// final day2 = date.add(new Duration(days: 1));
+final day4 = date.add(new Duration(days: 3));
+var daten3=DateFormat("yyyy-MM-dd").format(day4);
 // final day3 = date.add(new Duration(days: 2));
 
 // final day4 = date.add(new Duration(days: 3));
-var date2 = DateFormat("d MMM").format(day2);
+// var date2 = DateFormat("d MMM").format(day2);
 // var date3 = DateFormat("d MMM").format(day3);
 // var date4 = DateFormat("d MMM").format(day4);
 
@@ -26,14 +28,14 @@ textStyle() {
   TextStyle(fontSize: 28.0, fontWeight: FontWeight.w700);
 }
 
-class Trainer extends StatefulWidget {
-  Trainer({Key key}) : super(key: key);
+class Trainer3 extends StatefulWidget {
+  Trainer3({Key key}) : super(key: key);
 
   @override
-  _TrainerState createState() => _TrainerState();
+  _Trainer3State createState() => _Trainer3State();
 }
 
-class _TrainerState extends State<Trainer> {
+class _Trainer3State extends State<Trainer3> {
 
 final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   void callSnackBar(String msg, [int er]) {
@@ -59,44 +61,34 @@ bool s17=false;bool s18=false;
   void initState() {
 
     super.initState();
-    // getTrainers();
-    getSlotss();
-    print(daten);
+    // gettrainers();
+    print(daten3);
     
   }
 
-  getSlotss() async {
-
-    Map data=
-    {
-      "sdate":daten.toString()+"T06:00:00.000Z+",
-      "edate":date2.toString()+"T00:00:00.000Z"
-    };
-  print("gng");
-    var response = await http.post(
-        "http://test.letsdooit.in:3000/api/trainer/getslots",
-        body: data,
-        headers: {
-          // "Content-type": "application/x-www-form-urlencoded",
-          "token":
-          //  global.token,
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6Ijc3Mzg2OTU5MjgiLCJpYXQiOjE1NzQ2MDcwNTAsImV4cCI6MTE2NTQ2MDcwNTB9.-eHmrhKWK4dBMESMLOD79QRQGx7J75MneKnkcnmQ6bA",
-        });
-    if (response.statusCode == 200) {
-      print("in ss");
-      jsonResponse = json.decode(response.body);
-      if (jsonResponse['success'] == true) {
-        setState(() {
-          // global.completedSlots = jsonResponse['completedsession'];
-          global.slotsF = jsonResponse['slots'];
-          print(global.slotsF);
-          // getAccountDetails();
-        });
-      }
-    } else {
-      print('error');
-    }
-  }
+  // gettrainers() async {
+  //   var response = await http.get(
+  //       "http://test.letsdooit.in:3000/api/workplace/gettrainers",
+  //       headers: {
+  //         // "Content-type": "application/x-www-form-urlencoded",
+  //         "token": global.token,
+  //         // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwaG9uZSI6Ijc3Mzg2OTU5MjgiLCJpYXQiOjE1NzQ2MDcwNTAsImV4cCI6MTE2NTQ2MDcwNTB9.-eHmrhKWK4dBMESMLOD79QRQGx7J75MneKnkcnmQ6bA",
+  //       });
+  //   if (response.statusCode == 200) {
+  //     jsonResponse = json.decode(response.body);
+  //     if (jsonResponse['success'] == true) {
+  //       setState(() {
+  //         // global.completedSlots = jsonResponse['completedsession'];
+  //         global.trainers = jsonResponse['trainers'];
+  //         print(global.trainers);
+  //         print(global.trainers.length);
+  //         // getAccountDetails();
+  //       });
+  //     }
+  //   } else {
+  //     print('error');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -209,7 +201,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T06:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T06:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -320,7 +312,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T07:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T07:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -433,7 +425,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T08:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T08:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T08:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -546,7 +538,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T09:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T09:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -659,7 +651,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T10:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T10:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -771,7 +763,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T11:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T11:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -883,7 +875,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T12:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T12:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -995,7 +987,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T13:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T13:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -1108,7 +1100,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T14:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T14:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -1220,7 +1212,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T15:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T15:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -1332,7 +1324,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T16:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T16:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -1444,7 +1436,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T17:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T17:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -1556,7 +1548,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T18:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T18:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -1668,7 +1660,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T19:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T19:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -1780,7 +1772,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T20:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T20:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -1892,7 +1884,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T21:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T21:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };
@@ -2004,7 +1996,7 @@ bool s17=false;bool s18=false;
                                                   // "date_time":"2019-11-28T06:00:00.000Z",
                                                   // "session_type":"gold",
                                                   // "trainer_status":"active"
-                                                  "date_time":daten.toString()+"T22:00:00.000Z",
+                                                  "date_time":daten3.toString()+"T22:00:00.000Z",
                                                   "session_type":global.tempForCategory.toString(),
                                                   "trainer_status":global.tp.toString()      
                                   };

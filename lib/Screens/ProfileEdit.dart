@@ -20,7 +20,15 @@ class _ProfileEditState extends State<ProfileEdit> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return 
+     WillPopScope(
+        onWillPop: () {
+          Navigator.pushNamed(context,"All");
+
+          // callSnackBar("Click Exit to leave The App");
+        },
+        child:
+    Scaffold(
       backgroundColor: Colors.white,
       appBar: new AppBar(
         backgroundColor: Colors.white,
@@ -141,8 +149,8 @@ class _ProfileEditState extends State<ProfileEdit> {
                                   // global.UserName=global.MobileNumber.text;
                                   global.emailId =
                                       global.emailIdController.text;
-                                  global.referralCode =
-                                      global.referralCodeController.text;
+                                  // global.referralCode =
+                                  //     global.referralCodeController.text;
                                   global.address =
                                       global.addressController.text;
 
@@ -194,6 +202,7 @@ class _ProfileEditState extends State<ProfileEdit> {
           ),
         ],
       ),
-    );
+    )
+     );
   }
 }

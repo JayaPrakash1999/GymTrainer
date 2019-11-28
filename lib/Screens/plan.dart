@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:trainer/Screens/Trainer.dart';
+import 'package:trainer/Screens/Trainer.dart';
+import 'package:trainer/Screens/Trainer.dart' as prefix0;
+import 'package:trainer/Screens/Trainer1.dart';
+import 'package:trainer/Screens/Trainer2.dart';
+import 'package:trainer/Screens/Trainer3.dart';
 import "package:intl/intl.dart";
 
 
@@ -105,7 +110,7 @@ class Today extends StatefulWidget {
 class _TodayState extends State<Today> {
   @override
   Widget build(BuildContext context) {
-    return Trainer();
+    return prefix0.Trainer();
   }
 }
 
@@ -118,7 +123,7 @@ class Nxt extends StatefulWidget {
 class _NxtState extends State<Nxt> {
   @override
   Widget build(BuildContext context) {
-    return Trainer();
+    return Trainer1();
   }
 }
 
@@ -131,7 +136,7 @@ class Nxt1 extends StatefulWidget {
 class _Nxt1State extends State<Nxt1> {
   @override
   Widget build(BuildContext context) {
-    return Trainer();
+    return Trainer2();
   }
 }
 
@@ -144,6 +149,6 @@ class Nxt2 extends StatefulWidget {
 class _Nxt2State extends State<Nxt2> {
   @override
   Widget build(BuildContext context) {
-    return Trainer();
+    return Trainer3();
   }
 }

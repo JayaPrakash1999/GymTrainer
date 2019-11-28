@@ -36,7 +36,7 @@ class _AccountDetailsState extends State<AccountDetails> {
         jsonResponse = json.decode(response.body);
         global.userName = jsonResponse['account']['name'];
         global.emailId = jsonResponse['account']['email'];
-        global.mobileNumber.text = jsonResponse['account']['phone'];
+        global.mobileNumber.text = jsonResponse['account']['phone']==null?global.phone:jsonResponse['account']['phone'];
         // global.referralCode = jsonResponse['account']['referalcode'].toString();
       });
     }
@@ -44,7 +44,14 @@ class _AccountDetailsState extends State<AccountDetails> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return WillPopScope(
+        onWillPop: () {
+          Navigator.pushNamed(context,"All");
+
+          // callSnackBar("Click Exit to leave The App");
+        },
+        child:
+    Scaffold(
         backgroundColor: Colors.white,
         appBar: new AppBar(
           backgroundColor: Colors.white,
@@ -187,7 +194,7 @@ class _AccountDetailsState extends State<AccountDetails> {
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: <Widget>[
                             Text(
-                              global.mobileNumber.text,
+                              global.phone==null?jsonResponse['account']['phone'].toString():global.phone,
                               textDirection: TextDirection.ltr,
                               style: TextStyle(
                                   fontSize: 20.0,
@@ -287,6 +294,6 @@ class _AccountDetailsState extends State<AccountDetails> {
               ),
             )
           ],
-        )));
+        ))));
   }
 }
